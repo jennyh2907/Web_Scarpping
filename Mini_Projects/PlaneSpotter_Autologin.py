@@ -4,7 +4,7 @@ import requests
 import time
 
 # %% [markdown]
-# 1. Access https://www.planespotters.net/user/login using a standard GET request. Read and store the cookies received in the response.  In addition, parse the response and read (and store to a string variable) the value of the hidden input field that will (most likely) be required in the login process.
+# Access https://www.planespotters.net/user/login. Read and store the cookies received.
 
 # %%
 # Access the page
@@ -29,7 +29,7 @@ print("cookie:", get_cookie)
 
 
 # %% [markdown]
-# 2. Make a post request using the cookies from (1) as well as all required name-value-pairs (including your username and passwords).
+# Make a post request using the cookies
 
 # %%
 time.sleep(5)
@@ -45,14 +45,14 @@ post_cookie = session_requests.cookies.get_dict()
 print("cookie:", post_cookie)
 
 # %% [markdown]
-# 3. Get the cookies from the response of the post request and add them to your cookies from (1).
+# Get the cookies from the response of the post request
 
 # %%
 cookies_dict = str(get_cookie) + str(post_cookie)
 print(cookies_dict)
 
 # %% [markdown]
-# 4. Verifies that you are logged in by accessing the profile page https://www.planespotters.net/member/profile with the saved cookies.
+# Access the member profile and verify login status
 
 # %%
 url = 'https://www.planespotters.net/member/profile'
@@ -61,7 +61,7 @@ page2 = session_requests.get(url, headers = my_headers, cookies = post_cookie)
 doc2 = BeautifulSoup(page2.content,'html.parser')
 
 # %% [markdown]
-# 5. Then, print out the following at the end: The entire Jsoup/BeautifulSoup document of your profile page / All (combined) cookies from (3) / A boolean value to show your username is contained in the document in part (5)(a).
+# Print profile page, all cookies and a boolean value to show the username is contained in the profile page
 
 # %%
 print(doc2)

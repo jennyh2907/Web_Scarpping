@@ -7,7 +7,7 @@ import re
 import pandas as pd
 
 # %% [markdown]
-# 1. Use the URL identified above and write code that loads the first page with 40 items per page of “B&N Top 100”.
+# Connect to Barnes & Noble, loads the first page with 40 items per page of “B&N Top 100”.
 
 # %%
 my_headers = {'User-Agent': 'Mozilla/5.0'}
@@ -16,11 +16,11 @@ soup = BeautifulSoup(url.content)
 print(soup.prettify()) 
 
 # %% [markdown]
-# 2. Take your code in (a) and create a list of each book’s product page URL. This list should be of length 40.
+# Create a list of each book’s product page URL (his list should be of length 40)
 
 # %%
 url_list = []
-def main():
+def List_URL():
 	try:
 		url= "https://www.barnesandnoble.com/b/books/_/N-1fZ29Z8q8?Nrpp=40&page=1"
 		my_headers = {'User-Agent': 'Mozilla/5.0'}
@@ -39,12 +39,12 @@ def main():
 		print("Problem with the connection...")
 
 if __name__ == '__main__':
-	main()
+	List_URL()
 
 print(url_list)
 
 # %% [markdown]
-# 3. Write a loop that downloads each product page of the top 40 books in “B&N Top 100”
+# Write a loop that downloads each product page of the top 40 books in “B&N Top 100”
 
 # %%
 def prepend(list, str):
@@ -56,7 +56,7 @@ url_list = prepend(url_list, "https://www.barnesandnoble.com")
 
 print(url_list)
 
-def main():
+def PageDownload():
 	try:
 		for i in range(1, 41):
 			url= url_list[i-1]
@@ -69,15 +69,16 @@ def main():
 		print("Problem with the connection...")
 
 if __name__ == '__main__':
-	main()
+	PageDownload()
 
 
 # %% [markdown]
-# 4. Write a separate piece of code that loops through the pages you downloaded in (c), opens and parses them into a Python or Java xxxxsoup-object. Next, access the “Overview” section of the page and print the first 100 characters of the overview text to screen.
+# Loop through the downloaded pages, opens and parses them 
+# Access the “Overview” section of the page and print the first 100 characters of the overview text to screen.
 
 # %%
 chars = []
-def main():
+def Hundred_Char():
     try:
         for i in range(1, 41):
             chars = []
@@ -100,8 +101,6 @@ def main():
         print("Problem with the connection...")
 
 if __name__ == '__main__':
-	main()
+	Hundred_Char()
 
-#print(chars)
-
-
+print(chars)

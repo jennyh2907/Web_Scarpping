@@ -7,7 +7,8 @@ import os
 import time
 
 # %% [markdown]
-# 1. Please get Selenium to work on your system. e., try to code something up in Java or Python that starts a browser of your choice, navigates to google.com, and searches for "askew" as well as "google in 1998" (separate searches!)
+# Use Selenium, navigates to google.com
+# Search for "askew" and  "google in 1998"
 
 # %%
 driver = webdriver.Chrome(service=Service('chromedriver_mac64'))
@@ -42,7 +43,9 @@ time.sleep(5) # sleep for 5 seconds so you can see the results
 driver.quit()
 
 # %% [markdown]
-# 2. Write a script that goes to bestbuy.com, clicks on Deal of the Day, reads how much time is left for the Deal of the Day and prints the remaining time to screen (console), clicks on the Deal of the Day (the actual product), clicks on its reviews, and saves the resulting HTML to your local hard drive as "bestbuy_deal_of_the_day.htm"
+# Access bestbuy.com "Deal of the Day" 
+# Read how much time is left for the Deal of the Day and prints the remaining time 
+# Clicks on the Deal of the Day, its reviews, and saves the resulting HTML to local hard drive 
 
 # %%
 driver = webdriver.Chrome(service=Service('chromedriver_mac64'))
@@ -77,8 +80,8 @@ third.click()
 time.sleep(10)
 
 # Save the resulting html to hardrive
-#WebDriverWait(driver,10).until(EC.element_to_be_clickable((By.XPATH,'//*[@class="btn btn-warning"]'))).click()
 content = driver.page_source
+
 # write the page content
 with open("bestbuy_deal_of_the_day.htm", "w+", encoding = 'utf-8') as file:
     file.write(content)
