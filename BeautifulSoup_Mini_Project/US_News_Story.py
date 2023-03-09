@@ -5,7 +5,7 @@ import re
 import urllib.request
 
 # %% [markdown]
-# Access US News.com
+# Loads "https://www.usnews.com/"
 
 # %%
 my_headers = {'User-Agent': 'Mozilla/5.0'}
@@ -14,7 +14,7 @@ soup = BeautifulSoup(url.content)
 print(soup.prettify()) 
 
 # %% [markdown]
-# Finds its current "Top Stories"
+# Find its current "Top Stories" 
 
 # %%
 def TopStory():
@@ -45,7 +45,7 @@ if __name__ == '__main__':
 	TopStory()
 
 # %% [markdown]
-# Read and print the URL of the second current top story
+# Read + print the URL of the _second_ current top story to the screen
 
 # %%
 url_list = []
@@ -58,7 +58,8 @@ def SecondStory():
 		soup = BeautifulSoup(page.text, 'lxml')
 		# find <p> that immediately follows <div> of class "col-md-6.
 		list_of_contents = soup.select("div.Box-w0dun1-0.ArmRestTopStories__Part-s0vo7p-1.erkdnc.biVKSR h3.Heading-sc-1w5xk2o-0.ContentBox__StoryHeading-sc-1egb8dt-3.MRvpF.fqJuKa.story-headline > a[href]")
-		# prints the HTML content to the screen 
+		# prints the HTML content to the screen (almost only text here
+		# just need to replaces "&nbsp;" with " ")
 		for link in list_of_contents:
 			tags = soup.find_all("a")
 			data = link.get('href')
@@ -72,7 +73,7 @@ if __name__ == '__main__':
 print(url_list[1])
 
 # %% [markdown]
-# Load the second current top story page
+# Load that page
 
 # %%
 my_headers = {'User-Agent': 'Mozilla/5.0'}
@@ -81,7 +82,7 @@ soup = BeautifulSoup(url.content)
 print(soup.prettify()) 
 
 # %% [markdown]
-# Read and print the header as well as the first 3 sentences of the main body 
+# Read + print the header as well as the first 3 sentences of the main body to the screen
 
 # %%
 sentences = []
@@ -95,8 +96,6 @@ def TitleAndThreeLines():
 		# find <p> that immediately follows <div> of class "col-md-6.
 		list_of_contents = soup.select("h1.Heading-sc-1w5xk2o-0.iQhOvV")
 		list_of_contents_2 = soup.select("div.Box-w0dun1-0.article-body__ArticleBox-sc-138p7q2-2.dWWnRo.eYFKbH div.Raw-slyvem-0.bCYKCn")
-		# prints the HTML content to the screen (almost only text here
-		# just need to replaces "&nbsp;" with " ")
 		for i in list_of_contents:
 			a = i.text
 			print(i.text)
@@ -116,3 +115,5 @@ if __name__ == '__main__':
 	TitleAndThreeLines()
 
 print(sentences)
+
+

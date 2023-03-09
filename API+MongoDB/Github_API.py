@@ -8,13 +8,15 @@ from bs4 import BeautifulSoup
 from datetime import datetime
 
 # %% [markdown]
-# Access https://api.github.com/repos/apache/hadoop/contributors
-# Extract the JSON corresponding to the first 100 contributors from this API
+# 1. Go to https://api.github.com and familiarize yourself with the API.
+
+# %% [markdown]
+# 2. Go to https://api.github.com/repos/apache/hadoop/contributors. This is the Apache Hadoop Github Repo's contributors’ endpoint. Extract the JSON corresponding to the first 100 contributors from this API. (Hint: the API request is a GET request and the variable name that handles the items per page is "per_page").  Write Java or Python code that does all this.
 
 # %%
 #  Connect to API 
 url = "https://api.github.com/repos/apache/hadoop/contributors?per_page=100"
-token = "Your_Github_token"
+token = "your_token"
 headers = {'Authorization': 'token ' + token}
 response_API = requests.get(url, headers=headers)
 print(response_API.status_code)
@@ -25,7 +27,7 @@ parse_100 = json.loads(data)
 # print(parse_100)
 
 # %% [markdown]
-# For each of the 100 contributors, accesses their and extracts "login", "id", "location", "email", "hireable", "bio", "twitter_username", "public_repos", "public_gists", "followers", "following", "created_at", print them to screen
+# 3. For each of the 100 contributors extracted in (2), write code that accesses their user information and extracts "login", "id", "location", "email", "hireable", "bio", "twitter_username", "public_repos", "public_gists", "followers", "following", "created_at" (and print those to screen)
 
 # %%
 # Create lists
@@ -65,9 +67,9 @@ for i in range(0, 100):
     print("created at:", created_at[i])
 
 # %% [markdown]
-# Creates an SQL database + table, and stores all the information obtained in it
+# 4. Write code that creates an SQL database + table, and stores all the information obtained in (3) in it.  Please be cautious of the data type you choose for each column and briefly justify your decisions.  What do you choose as Primary Key and why?
 # 
-# Since login, location, email, bio and twitter_username contain text and/or special characters, I define them as VARCHAR(255). As for the timestamp column created_at, I define it as DATETIME. For the rest of columns, I define them all as INT because they only contain numbers. And I choose id as a primary key as it looks like and unique identifier of each user as well as it allows for efficient indexing and faster search queries.
+#     Since login, location, email, bio and twitter_username contain text and/or special characters, I define them as VARCHAR(255). As for the timestamp column created_at, I define it as DATETIME. For the rest of columns, I define them all as INT because they only contain numbers. And I choose id as a primary key as it looks like and unique identifier of each user as well as it allows for efficient indexing and faster search queries.
 
 # %%
 #ignore warnings
@@ -109,9 +111,9 @@ for i in range(0, 100):
     cursor.execute("INSERT INTO Github (login, id, location, email, hireable, bio, twitter_username, public_repo, public_gist, followers, following, created_at) VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s, %s)",(login[i], id[i], location[i], email[i], hireable[i], bio[i], twitter[i], public_repo[i], public_gist[i], follower[i], following[i], created_at_2[i]))
 
 # %% [markdown]
-# Optimize the code to allow for quick look-ups of "login", "location", and "hireable"
-
-# I decide to put a index on them. Without an index, the database would need to scan through every row in the table to find the data that matches the query. This can be very slow, especially for large tables. With an index, the database creates a separate data structure that maps the values in the indexed columns to the physical locations of the rows in the table. This data structure allows the database to quickly find the relevant rows that match the query by performing binary search.
+# 5. Optimize your code in (4) to allow for quick look-ups of "login", "location", and "hireable".  What choices do you make and why?
+# 
+#     I decide to put a index on them. Without an index, the database would need to scan through every row in the table to find the data that matches the query. This can be very slow, especially for large tables. With an index, the database creates a separate data structure that maps the values in the indexed columns to the physical locations of the rows in the table. This data structure allows the database to quickly find the relevant rows that match the query by performing binary search.
 
 # %%
 # Check if index exist, if not then create index
