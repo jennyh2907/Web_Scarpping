@@ -1,5 +1,4 @@
-## **About the Repo**
----
+## **About the Repo - Web_Scrapping**
 ### **1. Beautiful_Soup_Mini_Project**
 This file is consisted of several mini projects using Python _Beautifulsoup_. Each project demonstrates how to scrape specific content of a website (Bookstore, Online shopping, US News) by looking into source code and write corresponding Python code to access it.
 
@@ -23,7 +22,6 @@ This file contains several mini projects regarding Github _API calls_ and _Mongo
 
 
 ## **Contact**
----
 **Jenny Huang | UC Davis MSBA 23' Candidate**
 
 hcwhuang@ucdavis.edu | [Linkedin](https://www.linkedin.com/in/chingwenhuang/)
